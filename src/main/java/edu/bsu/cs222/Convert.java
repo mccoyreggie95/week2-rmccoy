@@ -1,6 +1,6 @@
 package edu.bsu.cs222;
 
-public class TriagePolicy {
+public class Convert {
     public Grade toGrade(float percent) {
         if (percent > 8f/9f) {
             return Grade.A;

@@ -7,9 +7,22 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GradeFileParser {
+/**
+ * Parses a stream of grades.
+ *
+ * Each line of the stream is expected to be a single numeric value
+ * in the range [0,1].
+ */
+public class GradeFile {
     static final class ParseException extends RuntimeException {}
 
+    /**
+     * Parse the input stream into a list of floats.
+     * @param input the input stream
+     * @return the list of floats resulting from parsing the input stream
+     * @throws IOException if there is a problem reading from the stream
+     * @throws ParseException if the stream does not contain a format recognized by this parser
+     */
     public List<Float> parse(InputStream input) throws IOException {
         if (input == null) {
             throw new IllegalArgumentException("Input stream must not be null.");
