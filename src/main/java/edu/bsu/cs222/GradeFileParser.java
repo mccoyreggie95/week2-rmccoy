@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GradeFileParser {
+    static final class ParseException extends RuntimeException {}
+
     public List<Float> parse(InputStream input) throws IOException {
         if (input == null) {
             throw new IllegalArgumentException("Input stream must not be null.");
@@ -16,8 +18,12 @@ public class GradeFileParser {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         String line;
         while ((line = reader.readLine()) != null) {
-            float f = Float.parseFloat(line);
-            result.add(f);
+            try {
+                float f = Float.parseFloat(line);
+                result.add(f);
+            } catch (NumberFormatException numberFormatException) {
+                throw new ParseException();
+            }
         }
         return result;
     }

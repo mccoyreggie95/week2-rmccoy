@@ -21,4 +21,10 @@ public class GradeFileParserTest {
         List<Float> values = parser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream("three.txt"));
         Assertions.assertEquals(3, values.size());
     }
+
+    @Test
+    public void testParse_invalidFile_throwsCheckedException() {
+        GradeFileParser parser = new GradeFileParser();
+        Assertions.assertThrows(GradeFileParser.ParseException.class, ()-> parser.parse(Thread.currentThread().getContextClassLoader().getResourceAsStream("invalid.txt")));
+    }
 }
