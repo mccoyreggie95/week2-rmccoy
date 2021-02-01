@@ -16,28 +16,22 @@ import java.util.List;
 public class GradeFile {
     static final class ParseException extends RuntimeException {}
 
-    /**
-     * Parse the input stream into a list of floats.
-     * @param input the input stream
-     * @return the list of floats resulting from parsing the input stream
-     * @throws IOException if there is a problem reading from the stream
-     * @throws ParseException if the stream does not contain a format recognized by this parser
-     */
-    public List<Float> parse(InputStream input) throws IOException {
-        if (input == null) {
+
+    public List<Float> parse(InputStream classPercentage) throws IOException {
+        if (classPercentage == null) {
             throw new IllegalArgumentException("Input stream must not be null.");
         }
-        List<Float> result = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-        String line;
-        while ((line = reader.readLine()) != null) {
+        List<Float> gradeList = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(classPercentage));
+        String gradeLine;
+        while ((gradeLine = reader.readLine()) != null) {
             try {
-                float f = Float.parseFloat(line);
-                result.add(f);
+                float grade = Float.parseFloat(gradeLine);
+                gradeList.add(grade);
             } catch (NumberFormatException numberFormatException) {
                 throw new ParseException();
             }
         }
-        return result;
+        return gradeList;
     }
 }
